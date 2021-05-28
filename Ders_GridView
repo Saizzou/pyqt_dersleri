@@ -1,0 +1,53 @@
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QGridLayout, QVBoxLayout, QDialog, QPushButton, QGroupBox, QApplication
+
+class App(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.baslik = 'PyQt5 Dersi'
+        self.sol = 0
+        self.ust= 0
+        self.en = 300
+        self.boy = 400
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle(self.baslik)
+        self.setGeometry(self.sol, self.ust, self.en, self.boy)
+
+        self.GridOlustur()
+
+        ekranArayuz = QVBoxLayout()
+        ekranArayuz.addWidget(self.gridkumesi)
+
+        self.setLayout(ekranArayuz)
+        self.show()
+
+    def GridOlustur(self):
+        self.gridkumesi = QGroupBox("Grid Kutular")
+        arayuz = QGridLayout()
+
+
+        arayuz.addWidget(QPushButton('1'), 0, 0)
+        arayuz.addWidget(QPushButton('2'), 0, 1)
+        arayuz.addWidget(QPushButton('3'), 0, 2)
+        arayuz.addWidget(QPushButton('4'), 1, 0)
+        arayuz.addWidget(QPushButton('5'), 1, 1)
+        arayuz.addWidget(QPushButton('6'), 1, 2)
+        arayuz.addWidget(QPushButton('7'), 2, 0)
+        arayuz.addWidget(QPushButton('8'), 2, 1)
+        arayuz.addWidget(QPushButton('9'), 2, 2)
+        arayuz.addWidget(QPushButton('0'), 3, 1)
+        arayuz.setColumnStretch(1,2)
+        arayuz.setColumnStretch(2,5)
+
+        self.gridkumesi.setLayout(arayuz)
+
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    calis = App()
+    sys.exit(app.exec_())
+
