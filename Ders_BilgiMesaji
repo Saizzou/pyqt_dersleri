@@ -1,0 +1,36 @@
+import sys
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+
+
+def ekran():
+    app = QApplication(sys.argv)
+    w = QWidget()
+    w.setWindowTitle('PyQt5 Ders 8')
+    w.setGeometry(0,0,300,400)
+
+    # Ana Ekran Buton Düzeni
+    buton1 = QPushButton(w)
+    buton1.setText('Bilgilendirme!')
+    buton1.move(100,50)
+    buton1.clicked.connect(bilgilendirme)
+
+    w.show()
+    sys.exit(app.exec_())
+
+
+def bilgilendirme():
+    msg = QMessageBox()
+    msg.setIcon(QMessageBox.Information)
+
+    msg.setText("Bu bir bilgilendirme mesajidir!")
+    msg.setInformativeText("Bu ek bilgilendirme iceren yazidir")
+    msg.setText("Bilgilendirme Kutusu")
+    msg.setWindowTitle('Bilgilendirme')
+    msg.setDetailedText("Detaylar bunlardir:\n \n Koddunyam.net Dersi")
+    msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+    calis = msg.exec_()
+
+if __name__=='__main__':
+    ekran()
