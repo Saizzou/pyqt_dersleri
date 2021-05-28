@@ -1,0 +1,63 @@
+import sys
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QPushButton,QVBoxLayout, QTabWidget
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import pyqtSlot
+
+class App(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.title = 'PyQT Dersi'
+        self.sol = 0
+        self.ust = 0
+        self.en = 300
+        self.boy = 200
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.sol, self.ust, self.en, self.boy)
+
+        self.tab_app = Tablar(self)
+        self.setCentralWidget(self.tab_app)
+        self.show()
+
+class Tablar(QWidget):
+    def __init__(self, temel):
+        super(QWidget, self).__init__(temel)
+        self.arayuz = QVBoxLayout(self)
+
+        # Tablar olusturma
+        self.tablar = QTabWidget()
+        self.tab1 = QWidget()
+        self.tab2 = QWidget()
+        self.tablar.resize(300,200)
+
+        # Tablari isimlendirme
+        self.tablar.addTab(self.tab1, "Tab1")
+        self.tablar.addTab(self.tab2, "Tab2")
+
+        # Tab 1 icerigi
+        self.tab1.arayuz = QVBoxLayout(self)
+        self.button_tab1 = QPushButton("Ben Kimim?")
+        self.tab1.arayuz.addWidget(self.button_tab1)
+        self.tab1.setLayout(self.tab1.arayuz)
+        self.button_tab1.clicked.connect(self.tiklama1)
+
+        # Tab 2 icerigi
+        self.tab2.arayuz = QVBoxLayout(self)
+        self.button_tab2 = QPushButton("Ben Kimim?")
+        self.tab2.arayuz.addWidget(self.button_tab2)
+        self.tab2.setLayout(self.tab2.arayuz)
+        self.button_tab2.clicked.connect(self.tiklama2)
+
+        # Tablari Widgete ekleme
+        self.arayuz.addWidget(self.tablar)
+        self.setLayout(self.arayuz)
+
+    def tiklama1(self):
+        print("Tab1e ait butonsun sen!")
+
+    def tiklama2(self):
+        print("Tab2e ait butonsun sen!")
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    goster = App()
+    sys.exit(app.exec_())
