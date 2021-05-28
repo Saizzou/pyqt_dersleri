@@ -1,0 +1,79 @@
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QGridLayout, QVBoxLayout, QDialog, QPushButton, QGroupBox, QApplication, QHBoxLayout
+
+class App(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.baslik = 'PyQt5 Dersi'
+        self.sol = 0
+        self.ust= 0
+        self.en = 300
+        self.boy = 400
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle(self.baslik)
+        self.setGeometry(self.sol, self.ust, self.en, self.boy)
+
+        self.GridOlustur()
+        self.YatayDuzen()
+        ekranArayuz = QVBoxLayout()
+        ekranArayuz.addWidget(self.gridkumesi)
+        ekranArayuz.addWidget(self.yatayduzen)
+        self.setLayout(ekranArayuz)
+        self.show()
+
+    def GridOlustur(self):
+        self.gridkumesi = QGroupBox("Grid Kutular")
+        arayuz = QGridLayout()
+
+
+        arayuz.addWidget(QPushButton('1'), 0, 0)
+        arayuz.addWidget(QPushButton('2'), 0, 1)
+        arayuz.addWidget(QPushButton('3'), 0, 2)
+        arayuz.addWidget(QPushButton('4'), 1, 0)
+        arayuz.addWidget(QPushButton('5'), 1, 1)
+        arayuz.addWidget(QPushButton('6'), 1, 2)
+        arayuz.addWidget(QPushButton('7'), 2, 0)
+        arayuz.addWidget(QPushButton('8'), 2, 1)
+        arayuz.addWidget(QPushButton('9'), 2, 2)
+        arayuz.addWidget(QPushButton('0'), 3, 1)
+        arayuz.setColumnStretch(1,2)
+        arayuz.setColumnStretch(2,5)
+
+        self.gridkumesi.setLayout(arayuz)
+
+    def YatayDuzen(self):
+        self.yatayduzen = QGroupBox("En Sevdiginiz Renk Nedir?")
+        arayuz2 = QHBoxLayout()
+
+        butonMavi = QPushButton('Mavi', self)
+        butonMavi.clicked.connect(self.tikla_mavi)
+        arayuz2.addWidget(butonMavi)
+
+        butonKirmizi = QPushButton('Kirmizi', self)
+        butonMavi.clicked.connect(self.tikla_kirmizi)
+        arayuz2.addWidget(butonKirmizi)
+
+        butonSari = QPushButton('Sari', self)
+        butonMavi.clicked.connect(self.tikla_sari)
+        arayuz2.addWidget(butonSari)
+        
+        self.yatayduzen.setLayout(arayuz2)
+
+    def tikla_mavi(self):
+        print("Mavi huydur bende!")
+        
+    def tikla_sari(self):
+        print("Sari huydur bende!")
+    
+    def tikla_kirmizi(self):
+        print("Kirmizi huydur bende!")
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    calis = App()
+    sys.exit(app.exec_())
+
