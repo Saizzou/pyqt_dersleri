@@ -1,0 +1,45 @@
+import sys
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import QGridLayout, QVBoxLayout, QDialog, QPushButton, QApplication, QWidget, QLineEdit, QInputDialog
+
+class App(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.baslik = "PyQt5 Dersleri"
+        self.sol = 0
+        self.ust = 0
+        self.en = 300
+        self.boy = 300
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle(self.baslik)
+        self.setGeometry(self.sol, self.ust, self.en, self.boy)
+
+        self.SayiGirdisi()
+        self.TercihGirdisi()
+        self.YaziGirdisi()
+        self.show()
+
+    def SayiGirdisi(self):
+        sayi, okBasildi = QInputDialog.getInt(self, "Bir Sayi Giriniz:","Sayimiz: ", 20,0,100)
+        if okBasildi:
+            print(sayi)
+
+    def TercihGirdisi(self):
+        icerik = ("Mavi", "Kirmizi", "Sari")
+        tercih, okBasildi = QInputDialog.getItem(self, "Get Item Fonksiyonu", "Rengini sec: ", icerik, 0, False)
+        if okBasildi:
+            print(tercih + " huydur bende!")
+
+    def YaziGirdisi(self):
+        yazi, okBasildi = QInputDialog.getText(self, "Text Girme", "Adinizi Girin: ",QLineEdit.Normal, "isim")
+        if okBasildi:
+            print("Hosgeldiniz, " + yazi)
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    calis = App()
+    sys.exit(app.exec_())
+
