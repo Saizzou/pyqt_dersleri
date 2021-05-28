@@ -1,0 +1,53 @@
+import sys
+from PyQt5.QtWidgets import QMainWindow, QApplication, QWidget, QAction, QTableWidget,QTableWidgetItem,QVBoxLayout
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import pyqtSlot
+
+class App(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.title = 'Koddunyam.net'
+        self.sol = 0
+        self.ust = 0
+        self.en = 300
+        self.boy = 200
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.sol, self.ust, self.en, self.boy)
+        self.tabloOlustur()
+
+        # Tabloyu Yerlestirme
+        self.arayuz = QVBoxLayout()
+        self.arayuz.addWidget(self.tabloWidget)
+        self.setLayout(self.arayuz)
+
+        # Ekrana getirme
+        self.show()
+
+    def tabloOlustur(self):
+        self.tabloWidget = QTableWidget()
+        self.tabloWidget.setRowCount(4)
+        self.tabloWidget.setColumnCount(2)
+        self.tabloWidget.setItem(0, 0, QTableWidgetItem("No: 1,1"))
+        self.tabloWidget.setItem(0, 1, QTableWidgetItem("No: 1,2"))
+        self.tabloWidget.setItem(1, 0, QTableWidgetItem("No: 2,1"))
+        self.tabloWidget.setItem(1, 1, QTableWidgetItem("No: 2,2"))
+        self.tabloWidget.setItem(2, 0, QTableWidgetItem("No: 3,1"))
+        self.tabloWidget.setItem(2, 1, QTableWidgetItem("No: 3,2"))
+        self.tabloWidget.setItem(3, 0, QTableWidgetItem("No: 4,1"))
+        self.tabloWidget.setItem(3, 1, QTableWidgetItem("No: 4,2"))
+        self.tabloWidget.move(0,0)
+
+        # Tabloya Komut
+        self.tabloWidget.doubleClicked.connect(self.tiklama)
+
+    def tiklama(self):
+        for tabloKonum in self.tabloWidget.selectedItems():
+            print(tabloKonum.row(), tabloKonum.column(), tabloKonum.text())
+            
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    goster = App()
+    sys.exit(app.exec_())
