@@ -314,8 +314,6 @@ class Ui_Dialog(object):
         self.btn_cikar.setText(_translate("Dialog", "-"))
         self.btn_topla.setText(_translate("Dialog", "+"))
 
-    icerik1 = ""
-    icerik2 = ""
 
     def tus_1(self):
         icerik = self.line_sonuc.text()
